@@ -9,7 +9,7 @@ const HomeSection = () => {
         <div className="bg-blue-100 p-16">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div>
-              <h1 className="text-5xl font-bold text-blue-950 mb-12">
+              <h1 className="text-4xl font-bold text-blue-950 mb-12">
                 Binlerce Ürün Arasından İstediğiniz Ürünü Bulmak İçin Hemen Başlayın!
               </h1>
               <ul className="space-y-4">
