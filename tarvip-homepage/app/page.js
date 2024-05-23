@@ -1,4 +1,4 @@
-import ProcessSteps from "@/components/process";
+import ProcessSteps from "/components/process";
 import HomeSection from "/components/homepage";
 
 export default function Home() {
