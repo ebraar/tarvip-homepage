@@ -31,3 +31,33 @@ body {
     text-wrap: balance;
   }
 }
+
+@keyframes progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-progress {
+  animation: progress 5s linear infinite;
+}
+
+.transition-transform {
+  transition: transform 0.5s;
+}
+
+.transition-opacity {
+  transition: opacity 0.5s;
+}
+
+.bg-green-500 {
+  background-color: #10B981; /* Tailwind's green-500 */
+}
+
+.bg-green-300 {
+  background-color: #6EE7B7; /* Tailwind's green-300 */
+}
