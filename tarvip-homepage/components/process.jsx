@@ -3,11 +3,24 @@ import React, { useState, useEffect } from 'react';
 
 const ProcessSteps = () => {
   const [progress, setProgress] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <786);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => (prev < 100 ? prev + 0.5 : 100)); // Daha yavaş ilerleme için daha küçük artış
-    }, 50); // Her 100ms'de bir ilerler
+    }, 40); // Her 100ms'de bir ilerler
 
     return () => clearInterval(interval);
   }, []);
