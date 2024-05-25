@@ -1,9 +1,10 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from 'react';
 
 const ProcessSteps = () => {
   const [progress, setProgress] = useState(0);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <786);
+  const [isMobile, setIsMobile] = useState(false);
+  const [visibleSteps, setVisibleSteps] = useState([false, false, false, false]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -16,11 +17,21 @@ const ProcessSteps = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress((prev) => (prev < 100 ? prev + 0.5 : 100)); // Daha yavaş ilerleme için daha küçük artış
-    }, 40); // Her 100ms'de bir ilerler
+      setProgress((prev) => {
+        const newProgress = prev < 100 ? prev + 0.33 : 100;
+        const stepIndex = Math.floor(newProgress / 33.33);
+        if (!visibleSteps[stepIndex] && newProgress % 33.33 <= 0.33) {
+          setVisibleSteps((prevVisibleSteps) => {
+            const newVisibleSteps = [...prevVisibleSteps];
+            newVisibleSteps[stepIndex] = true;
+            return newVisibleSteps;
+          });
+        }
+        return newProgress;
+      });
+    }, 40); // Her 40ms'de bir ilerler
 
     return () => clearInterval(interval);
   }, []);
@@ -39,7 +50,7 @@ const ProcessSteps = () => {
         {[1, 2, 3, 4].map((step) => (
           <div key={step} className="flex flex-col items-center relative z-10">
             <div className={`rounded-full w-8 h-8 mb-2 transition-all duration-700 ease-linear ${getStepClass(step)}`}></div>
-            <p className={`font-bold text-ml transition-opacity duration-500 ease-linear ${progress >= (step - 1) * 33.33 ? 'opacity-100' : 'opacity-50'}`}>
+            <p className={`font-bold text-ml transition-opacity duration-500 ease-linear ${visibleSteps[step - 1] ? 'opacity-100' : 'opacity-0'}`}>
               {step === 1 && 'Dosya Yükle'}
               {step === 2 && 'Süreci Belirle'}
               {step === 3 && 'Sipariş Ver'}
@@ -50,6 +61,6 @@ const ProcessSteps = () => {
       </div>
     </div>
   );
-  };
-  
-  export default ProcessSteps;
+};
+
+export default ProcessSteps;
