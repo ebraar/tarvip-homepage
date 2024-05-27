@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 
-const ProcessSteps = () => {
+const Process = () => {
   const [progress, setProgress] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [visibleSteps, setVisibleSteps] = useState([false, false, false, false]);
@@ -63,4 +63,4 @@ const ProcessSteps = () => {
   );
 };
 
-export default ProcessSteps;
+export default Process;
