@@ -1,9 +1,12 @@
 "use client"
-import ProcessSteps from "/components/process";
+import Process from "/components/process";
 import HomeSection from "/components/homepage";
 import MobileProcessSteps from "/components/processMobil";
 import Head from 'next/head';
 import React, { useState, useEffect } from "react";
+import ProductSlider from "/components/slidableServices";
+import ProcessSteps from "/components/processSteps";
+import Testimonials from "@/components/testimonials";
 
 export default function Home() {
 
@@ -30,7 +33,17 @@ export default function Home() {
     <div>
       <HomeSection/>
       <div>
-      {isMobile ? <MobileProcessSteps /> : <ProcessSteps />}
+      {isMobile ? <MobileProcessSteps /> : <Process />}
+      </div>
+
+      <div className="w-full max-w-7xl min-w-full p-10 bg-blue-200">
+      <ProductSlider/>
+      </div>
+      <div className="w-full max-w-7xl min-w-full p-4 bg-blue-100">
+        <ProcessSteps/>
+      </div>
+      <div className="w-full max-w-7xl min-w-full p-4 bg-blue-950">
+        <Testimonials/>
       </div>
     </div>
     </>
